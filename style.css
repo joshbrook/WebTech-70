@@ -1,6 +1,6 @@
 img.icon {
     height: auto;
-    width: 20%;
+    width: 30%;
     display: block;
     margin-left: 10;
     margin-right: 10;
@@ -14,7 +14,7 @@ img.icon {
   
   #authors td, #authors th {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 10px;
     width: auto;
   }
   
@@ -23,7 +23,7 @@ img.icon {
   #authors tr:nth-child(even){background-color: #f2f2f2;}
   
   #authors th {
-    background-color: #04AA6D;
+    background-color: #1e8fc4;
     color: white;
     padding-top: 12px;
     padding-bottom: 12px;
