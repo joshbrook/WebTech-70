@@ -1,0 +1,31 @@
+img.icon {
+    height: auto;
+    width: 20%;
+    display: block;
+    margin-left: 10;
+    margin-right: 10;
+}
+
+#authors {
+    font-family: "Lucida Console", "Courier New", monospace;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #authors td, #authors th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    width: auto;
+  }
+  
+  #authors tr:hover {background-color: #ddd;}
+
+  #authors tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #authors th {
+    background-color: #04AA6D;
+    color: white;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+  }
