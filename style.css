@@ -1,31 +1,81 @@
 img.icon {
-    height: auto;
-    width: 30%;
+    max-width: 200px;
     display: block;
-    margin-left: 10;
-    margin-right: 10;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {font-family: 'Garamond', serif; 
+    font-size: 50px;
+    font-weight: 800; 
+    line-height: 72px; 
+    margin: 10 0 24px; 
+    text-align: center; 
+}
+
+h2 {font-family: 'Garamond', serif; 
+    font-size: 30px;
+    margin: 2 0 2px; 
+    text-align: center; 
+}
+
+#nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+  
+#nav li {
+    float: left;
+}
+  
+#nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#nav .active {
+    background-color: #1e8fc4;
+  }
+
+#nav li a:hover {
+    background-color: #111;
 }
 
 #authors {
-    font-family: "Lucida Console", "Courier New", monospace;
+    font-family: Georgia, "Courier New", monospace;
     border-collapse: collapse;
-    width: 100%;
-  }
+    margin: 5%;
+}
   
-  #authors td, #authors th {
-    border: 1px solid #ddd;
+#authors td, #authors th {
+    border: 3px solid #ddd;
     padding: 10px;
     width: auto;
-  }
-  
-  #authors tr:hover {background-color: #ddd;}
+}
 
-  #authors tr:nth-child(even){background-color: #f2f2f2;}
-  
-  #authors th {
+#authors tr:nth-child(even) {
+    background-color: #e7e7df
+}
+
+#authors th {
     background-color: #1e8fc4;
     color: white;
-    padding-top: 12px;
-    padding-bottom: 12px;
     text-align: center;
-  }
+}
+
+#authors tr:hover {
+    opacity: 0.8
+}
+
+/*
+margin-top:5;
+margin-bottom: 5;
+margin-left: 5;
+margin-right: 5;
+*/
