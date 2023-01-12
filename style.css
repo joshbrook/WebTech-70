@@ -134,25 +134,27 @@ input:focus {
 }
 
 @media only screen and (max-width: 600px) {
-  table {
-    display: block;
-  }
-  tr{
-    border:1px solid black;
-    display:block;
-  }
-  th{
-    display:none;
-  }
-  td{
-    display:inline-block;
-  }
-  #authors tr:nth-child(odd) {
+    table {
+        display: block;
+    }
 
-  }
-  #authors td {
-    border:0;
-  }
+    tr{
+        border:1px solid black;
+        display:block;
+    }
+
+    th{
+        display:none;
+    }
+    
+    td{
+        display:inline-block;
+    }
+    
+    #authors td {
+        border:0;
+    }
+}
 
 input {
     width: 80%;
