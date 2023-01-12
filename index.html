@@ -8,16 +8,17 @@
    <body>
     <nav id="nav">
         <ul>
-           <li class="active"><a href=""> Home </a></li>
-           <li><a href="other.html"> Other </a></li>
+           <li class="active"><a href="index.html"> Home </a></li>
+           <li><a href=#bestSellingAuthors> Top 5 </a></li>
         </ul>
       </nav>
-    <h1>Assignment 1: "HTML & CSS Markup"</h1>
+    <h1>Assignment 1: "<abbr title="HyperText Markup Language">HTML</abbr> & <abbr title="Cascading Style Sheets">CSS</abbr> Markup"</h1>
     <h2>Web Tech Group 70</h2>
     <h2 style="font-size: 20px">Josh & Bodhi</h2>
 
       <section>
             <table id="authors">
+               <caption><strong><pre>Photo album of famous authors</pre></strong></caption>
                 <tr>
                   <th><strong>Image</strong></th>
                   <th><strong>Author</strong></th>
@@ -27,11 +28,16 @@
                 </tr>
 
                 <tr>
-                    <td><img class="icon" src="https://atomstalk.com/wp-content/uploads/2020/10/richard-feynman.jpg"></td>
+                    <td>
+                     <figure>
+                        <img class="icon" src="https://atomstalk.com/wp-content/uploads/2020/10/richard-feynman.jpg">
+                        <figcaption>picture 1</figcaption>
+                     </figure>
+                    </td>
                     <td>Richard Feynman</td>
                     <td>Image of Nobel laureate Richard Feynman</td>
                     <td>
-                        <ul>
+                        <ul class="tags">
                             <li>physics</li>
                             <li>nobel prize</li>
                             <li>man</li>
@@ -47,7 +53,7 @@
                     <td>Judith Butler</td>
                     <td>Image of author Judith Butler</td>
                     <td>
-                        <ul>
+                        <ul class="tags">
                             <li>philosophy</li>
                             <li>gender</li>
                             <li>queer theory</li>
@@ -61,9 +67,9 @@
                 <tr>
                     <td><img class="icon" src="https://d2eehagpk5cl65.cloudfront.net/img/q60/uploads/2023/01/jordanpeterson_1161x653.jpg"></td>
                     <td>Jordan Peterson</td>
-                    <td>Image of Jordan peterson</td>
+                    <td>Image of Psychologist Jordan Peterson</td>
                     <td>
-                        <ul>
+                        <ul class="tags">
                             <li>phychologist</li>
                             <li>author</li>
                             <li>teacher</li>
@@ -80,7 +86,7 @@
                     <td>Albert Camus</td>
                     <td>Image of philosopher Albert Camus</td>
                     <td>
-                        <ul>
+                        <ul class="tags">
                            <li>philosophy</li>
                            <li>french</li>
                            <li>absurdism</li>
@@ -91,32 +97,42 @@
                         After the war, he wrote many books and gave many lectures around the world.</td>
                 </tr>
                 
-                <form action="https://wt.ops.labs.vu.nl/api23/a860222c" method="post">
+                <form action="https://wt.ops.labs.vu.nl/api23/df2d1c0d" method="post">
                   <tr>
                      <td>
-                        <label for="img">Image Url: </label>
-                        <input type="text" id="img" name="img"><br>
+                        <label for="image">Image Url: </label>
+                        <input type="text" id="image" name="image" required><br>
                      </td>
                      <td>
                         <label for="author">Author name: </label>
-                        <input type="text" id="author" name="author" placeholder=" Richard Feynman"><br>
+                        <input type="text" id="author" name="author" required><br>
                      </td>
                      <td>
                         <label for="alt">Alt: </label>
-                        <input type="text" id="alt" name="alt">
+                        <input type="text" id="alt" name="alt" required>
                      </td>
                      <td>
                         <label for="tags">Tags: </label>
-                        <input type="text" id="tags" name="tags">
+                        <input type="text" id="tags" name="tags" required>
                      </td>
                      <td>
-                        <label for="description">Description: </label>
-                        <input type="text" id="description" name="description">
+                        <label for="description">Description: </label><br>
+                        <input type="text" id="description" name="description" required>
                         <input type="submit" value="Submit">
                      </td>
                   </tr>
                 </form>
             </table>
+      </section><br>
+      <section id="bestSellingAuthors">
+         <h3>Top 5 Best selling authors of all time</h3>
+         <ol>
+            <li>William Shakespeare</li>
+            <li>Agatha Christie</li>
+            <li>Barbara Cartland</li>
+            <li>Danielle Steel</li>
+            <li>Harold Robbins</li>
+         </ol>
       </section>
    </body>
 </html>

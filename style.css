@@ -72,6 +72,14 @@ h2 {font-family: 'Garamond', serif;
 #authors tr:hover {
     opacity: 0.8
 }
+section{
+  text-align: center;
+}
+ol, ul.tags{
+  display: inline-block;
+  text-align: left;
+}
+
 
 /*
 margin-top:5;
