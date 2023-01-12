@@ -5,22 +5,52 @@ img.icon {
     margin-right: auto;
 }
 
+p {
+    font: normal normal normal large Georgia;
+    vertical-align: baseline;
+    text-align: center;
+    text-transform: none;
+    text-indent: 0;
+    border-collapse: collapse;
+    margin: 2% 15%;
+    margin-top: 2%;
+    margin-bottom: 2%
+}
+
+p:link {
+    text-decoration: wavy;
+    color: aqua;
+}
+
 h1 {font-family: 'Garamond', serif; 
-    font-size: 50px;
+    font-size: xxx-large;
     font-weight: 800;
+    font-style: normal;
+    font-variant: inherit;
     line-height: 72px; 
     margin: 10 0 24px; 
     text-align: center; 
 }
 
-h2 {font-family: 'Garamond', serif; 
-    font-size: 30px;
+h2 {font: 'Garamond', serif; 
+    font-size: xx-large;
     margin: 2 0 2px; 
-    text-align: center; 
+    text-align: center;
+}
+
+@media print {
+    h3 {page-break-before: always;}
+    footer {page-break-after: unset;}
+    p {
+        orphans: 4;
+        widows: 2;
+    }
 }
 
 nav ul {
     list-style-type: none;
+    list-style-position: none;
+    list-style-image: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -44,21 +74,29 @@ nav li a {
 }
 
 nav .active {
-    background-color: #1e8fc4;
+    background: #1e8fc4;
+    border-color:#111;
+    border-width: 0px;
+    border-style: none;
+    border-spacing: 0ch;
   }
 
 nav li a:hover {
     background-color: #111;
+    text-decoration: underline dotted;
+    text-decoration-thickness: 1px; 
 }
 
 #authors {
+    caption-side: top;
     font-family: Georgia, "Courier New", monospace;
     border-collapse: collapse;
-    margin: 5%;
+    margin: 2% 5%;
 }
   
 #authors td, #authors th {
     border: 3px solid #ddd;
+    font-size: medium;
     padding: 10px;
     width: auto;
 }
@@ -76,12 +114,23 @@ nav li a:hover {
 #authors tr:hover {
     opacity: 0.8
 }
+
 section{
-  text-align: center;
+    text-align: center;
 }
-ol, ul.tags{
-  display: inline-block;
-  text-align: left;
+
+ul.tags {
+    display: block;
+    text-align: left;  
+}
+
+ol {
+    display: inline-block;
+    text-align: left;
+}
+
+input:focus {
+    background-color: rgb(243, 247, 249);
 }
 
 @media only screen and (max-width: 600px) {
@@ -104,11 +153,26 @@ ol, ul.tags{
   #authors td {
     border:0;
   }
+
+input {
+    width: 80%;
+    margin: 3% 5%;
+    border: 2px solid #1e8fc4;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-/*
-margin-top:5;
-margin-bottom: 5;
-margin-left: 5;
-margin-right: 5;
-*/
+button {
+    background-color: #1e8fc4;
+    border: none;
+    color: white;
+    padding: 8px 18px;
+    text-align: center;
+    display: inline-block;
+    font-size: medium;
+    border-radius: 8px;
+}
+
+button:hover {
+    background-color: #0f73a1;
+}

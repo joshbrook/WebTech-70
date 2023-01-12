@@ -13,9 +13,9 @@
            <li><a href=#bestSellingAuthors> Other </a></li>
         </ul>
       </nav>
-    <h1>Assignment 1: "<abbr title="HyperText Markup Language">HTML</abbr>& <abbr title="Cascading Style Sheets">CSS</abbr> Markup"</h1>
+    <h1>Assignment 1: "<abbr title="HyperText Markup Language">HTML</abbr> & <abbr title="Cascading Style Sheets">CSS</abbr> Markup"</h1>
     <h2>Web Tech Group 70</h2>
-    <h2 style="font-size: 20px">Josh & Bodhi</h2>
+    <h2 style="font-size: x-large">Josh & Bodhi</h2>
 
     <p>
         This webpage contains a photo album of famous authors, and displays functional use of various fundamentals of HTML and CSS.
@@ -36,7 +36,7 @@
 
                 <tr>
                     <td><img class="icon" src="https://atomstalk.com/wp-content/uploads/2020/10/richard-feynman.jpg"></td>
-                    <td>Richard Feynman</td>
+                    <td><nobr>Richard Feynman</nobr></td>
                     <td>Image of Nobel laureate Richard Feynman</td>
                     <td>
                         <ul class="tags">
@@ -72,8 +72,8 @@
                     <td>Image of Psychologist Jordan Peterson</td>
                     <td>
                         <ul class="tags">
-                            <li>phychologist</li>
-                            <li>right-wing</li>
+                            <li>psychology</li>
+                            <li>media</li>
                             <li>teacher</li>
                         </ul>
                     </td>
@@ -97,33 +97,34 @@
                         After the war, he wrote many books and gave many lectures around the world.</td>
                 </tr>
                 
-                <form action="https://wt.ops.labs.vu.nl/api23/df2d1c0d" method="post">
+                <form action="https://wt.ops.labs.vu.nl/api23/df2d1c0d" method="post" id="main">
                   <tr>
                      <td>
-                        <label for="image">Image Url: </label>
-                        <input type="text" id="image" name="image" required><br>
+                        <label for="image">Image URL: </label><br>
+                        <input type="text" id="image" name="image" required>
                      </td>
                      <td>
-                        <label for="author">Author name: </label>
-                        <input type="text" id="author" name="author" required><br>
+                        <label for="author">Author Name: </label><br>
+                        <input type="text" id="author" name="author" required>
                      </td>
                      <td>
-                        <label for="alt">Alt: </label>
+                        <label for="alt">Alt Text: </label><br>
                         <input type="text" id="alt" name="alt" required>
                      </td>
                      <td>
-                        <label for="tags">Tags: </label>
+                        <label for="tags">Tags: </label><br>
                         <input type="text" id="tags" name="tags" required>
                      </td>
                      <td>
                         <label for="description">Description: </label><br>
                         <input type="text" id="description" name="description" required>
-                        <input type="submit" value="Submit">
                      </td>
                   </tr>
                 </form>
             </table>
+            <button form="main" type="submit" value="Submit">Submit</button>
       </section><br>
+
       <section id="bestSellingAuthors">
          <h3>Top 5 Best selling authors of all time</h3>
          <ol>
@@ -137,11 +138,13 @@
       <section>
          <figure>
             <img src="https://www.williamshakespeare.net/images/shakespeare.jpg" class="icon">
-            <figcaption>picture of William Shakespeare</figcaption>
+            <figcaption>Fig 1: Picture of William Shakespeare</figcaption>
          </figure>
          <dl>
-            <dd><strong>Tags</strong></dd>
-            <dt>Playwrighter, poet and actor</dt>
+            <dt><strong>Tags</strong></dt>
+            <dt style="display: inline;">Playwright,</dt>
+            <dt style="display: inline;">Poet,</dt>
+            <dt style="display: inline;">Actor</dt>
          </dl>
       </section>
    </body>
