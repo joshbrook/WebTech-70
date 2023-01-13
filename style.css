@@ -133,6 +133,10 @@ input:focus {
     background-color: rgb(243, 247, 249);
 }
 
+#compatibility {
+  border-top:1px solid black;
+}
+
 @media only screen and (max-width: 600px) {
   table {
     display: block;
@@ -174,3 +178,4 @@ button {
 button:hover {
     background-color: #0f73a1;
 }
+
