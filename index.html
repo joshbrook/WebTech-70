@@ -24,8 +24,9 @@
     </p>
 
       <section>
+         <form action="https://wt.ops.labs.vu.nl/api23/df2d1c0d" method="post" id="main">
             <table id="authors">
-               <caption><strong><pre>Photo album of famous authors</pre></strong></caption>
+               <caption><pre><strong>Photo album of famous authors</strong></pre></caption>
                 <tr>
                   <th><strong>Image</strong></th>
                   <th><strong>Author</strong></th>
@@ -35,8 +36,8 @@
                 </tr>
 
                 <tr>
-                    <td><img class="icon" src="https://atomstalk.com/wp-content/uploads/2020/10/richard-feynman.jpg"></td>
-                    <td><nobr>Richard Feynman</nobr></td>
+                    <td><img class="icon" src="https://atomstalk.com/wp-content/uploads/2020/10/richard-feynman.jpg" alt="Richard Feynman"></td>
+                    <td style="white-space:nowrap;">Richard Feynman</td>
                     <td>Image of Nobel laureate Richard Feynman</td>
                     <td>
                         <ul class="tags">
@@ -51,7 +52,7 @@
                  </tr>
 
                 <tr>
-                    <td><img class="icon" src="https://pyxis.nymag.com/v1/imgs/7bf/e7e/cbbefb2176e6ba558f9f0467e546cf0573-16-judith-butler.2x.h560.w750.jpg"></td>
+                    <td><img class="icon" src="https://pyxis.nymag.com/v1/imgs/7bf/e7e/cbbefb2176e6ba558f9f0467e546cf0573-16-judith-butler.2x.h560.w750.jpg" alt="Judith Butler"></td>
                     <td>Judith Butler</td>
                     <td>Image of author Judith Butler</td>
                     <td>
@@ -67,7 +68,7 @@
                 </tr>
 
                 <tr>
-                    <td><img class="icon" src="https://d2eehagpk5cl65.cloudfront.net/img/q60/uploads/2023/01/jordanpeterson_1161x653.jpg"></td>
+                    <td><img class="icon" src="https://d2eehagpk5cl65.cloudfront.net/img/q60/uploads/2023/01/jordanpeterson_1161x653.jpg" alt="Jordan Peterson"></td>
                     <td>Jordan Peterson</td>
                     <td>Image of Psychologist Jordan Peterson</td>
                     <td>
@@ -82,7 +83,7 @@
                 </tr>
 
                 <tr>
-                    <td><img class="icon" src="https://media.newyorker.com/photos/5909675d019dfc3494ea0dd0/master/w_2560%2Cc_limit/120409_r22060_g2048.jpg"></td>
+                    <td><img class="icon" src="https://media.newyorker.com/photos/5909675d019dfc3494ea0dd0/master/w_2560%2Cc_limit/120409_r22060_g2048.jpg" alt="Albert Camus"></td>
                     <td>Albert Camus</td>
                     <td>Image of philosopher Albert Camus</td>
                     <td>
@@ -96,8 +97,6 @@
                         He joined the French Resistance during WWII where he served as editor-in-chief at <em>Combat</em>, an outlawed newspaper. 
                         After the war, he wrote many books and gave many lectures around the world.</td>
                 </tr>
-                
-                <form action="https://wt.ops.labs.vu.nl/api23/df2d1c0d" method="post" id="main">
                   <tr>
                      <td>
                         <label for="image">Image URL: </label><br>
@@ -120,9 +119,9 @@
                         <input type="text" id="description" name="description" required>
                      </td>
                   </tr>
-                </form>
             </table>
             <button form="main" type="submit" value="Submit">Submit</button>
+         </form>
       </section><br>
 
       <section id="bestSellingAuthors">
@@ -137,14 +136,12 @@
       </section>
       <section>
          <figure>
-            <img src="https://www.williamshakespeare.net/images/shakespeare.jpg" class="icon">
+            <img src="https://www.williamshakespeare.net/images/shakespeare.jpg" alt="William Shakespeare" class="icon">
             <figcaption>Fig 1: Picture of William Shakespeare</figcaption>
          </figure>
          <dl>
             <dt><strong>Tags</strong></dt>
-            <dt style="display: inline;">Playwright,</dt>
-            <dt style="display: inline;">Poet,</dt>
-            <dt style="display: inline;">Actor</dt>
+            <dd>Playwright, Poet, Actor</dd>
          </dl>
       </section>
    </body>

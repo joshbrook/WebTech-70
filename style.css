@@ -147,12 +147,10 @@ input:focus {
   td{
     display:inline-block;
   }
-  #authors tr:nth-child(odd) {
-
-  }
   #authors td {
     border:0;
   }
+}
 
 input {
     width: 80%;
