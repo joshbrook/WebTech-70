@@ -28,13 +28,12 @@ h1 {font-family: 'Garamond', serif;
     font-style: normal;
     font-variant: inherit;
     line-height: 72px; 
-    margin: 10 0 24px; 
     text-align: center; 
 }
 
-h2 {font: 'Garamond', serif; 
+h2 {font-family: 'Garamond', serif; 
     font-size: xx-large;
-    margin: 2 0 2px; 
+    margin: 1% 0; 
     text-align: center;
 }
 
@@ -49,7 +48,7 @@ h2 {font: 'Garamond', serif;
 
 nav ul {
     list-style-type: none;
-    list-style-position: none;
+    list-style-position: inherit;
     list-style-image: none;
     margin: 0;
     padding: 0;

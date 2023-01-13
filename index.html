@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="style.css">
       <title>Assignment 1 Group 70</title>
    </head>
+
    <body>
     <nav id="nav">
         <ul>
@@ -23,10 +25,11 @@
         The website is optimised to display on both PC displays and mobile devices.
     </p>
 
-      <section>
-         <form action="https://wt.ops.labs.vu.nl/api23/df2d1c0d" method="post" id="main">
+    <section>
+        <form action="https://wt.ops.labs.vu.nl/api23/df2d1c0d" method="post" id="main">
             <table id="authors">
                <caption><pre><strong>Photo album of famous authors</strong></pre></caption>
+                
                 <tr>
                   <th><strong>Image</strong></th>
                   <th><strong>Author</strong></th>
@@ -97,66 +100,67 @@
                         He joined the French Resistance during WWII where he served as editor-in-chief at <em>Combat</em>, an outlawed newspaper. 
                         After the war, he wrote many books and gave many lectures around the world.</td>
                 </tr>
-                  <tr>
-                     <td>
+
+                <tr>
+                    <td>
                         <label for="image">Image URL: </label><br>
                         <input type="text" id="image" name="image" required>
-                     </td>
-                     <td>
+                    </td>
+                    <td>
                         <label for="author">Author Name: </label><br>
                         <input type="text" id="author" name="author" required>
-                     </td>
-                     <td>
+                    </td>
+                    <td>
                         <label for="alt">Alt Text: </label><br>
                         <input type="text" id="alt" name="alt" required>
-                     </td>
-                     <td>
+                    </td>
+                    <td>
                         <label for="tags">Tags: </label><br>
                         <input type="text" id="tags" name="tags" required>
-                     </td>
-                     <td>
+                    </td>
+                    <td>
                         <label for="description">Description: </label><br>
                         <input type="text" id="description" name="description" required>
-                     </td>
-                  </tr>
+                    </td>
+                </tr>
             </table>
             <button form="main" type="submit" value="Submit">Submit</button>
-         </form>
-      </section><br>
+        </form>
+    </section><br>
 
-      <section id="bestSellingAuthors">
-         <h3>Top 5 Best selling authors of all time</h3>
-         <ol>
+    <section id="bestSellingAuthors">
+        <h3>Top 5 Best selling authors of all time</h3>
+        <ol>
             <li>William Shakespeare</li>
             <li>Agatha Christie</li>
             <li>Barbara Cartland</li>
             <li>Danielle Steel</li>
             <li>Harold Robbins</li>
-         </ol>
-      </section>
-      <section>
-         <figure>
+        </ol>
+    </section>
+    <section>
+        <figure>
             <img src="https://www.williamshakespeare.net/images/shakespeare.jpg" alt="William Shakespeare" class="icon">
             <figcaption>Fig 1: Picture of William Shakespeare</figcaption>
-         </figure>
-         <dl>
+        </figure>
+        <dl>
             <dt><strong>Tags</strong></dt>
             <dd>Playwright, Poet, Actor</dd>
-         </dl>
-      </section>
-      <section id="compatibility">
-         <h3>Compatibility report</h3>
-         <p>
+        </dl>
+    </section>
+
+    <section id="compatibility">
+        <h2>Compatibility Report</h3>
+        <p>
             To test and see if this webpage looks different in other browsers, we ran our webpage on three different
             browsers: Google Chrome, Microsoft Edge and Firefox. The differences between Google Chrome and Microsoft 
             Edge are barely visible. Although in Firefox there was one noticeable difference. The message that appears 
             when you forget to fill in the form completely has a whole different style compared to the other browsers.
             Each browser has it's own default values for these kind of things. 
             <br><br>
-            Furthermore the size of your screen will determine the way this webpage presents itself. If the screen has a
-            width below 600px the table will collapse and appear differently in order to make it more readable on small 
-            screens. 
-         </p>
-      </section>
-   </body>
+            Furthermore, the webpage is designed to be compatible with hendheld devices, meaning the size of the screen will determine layout of the webpage. 
+            If the screen has a width below 600px the main table will collapse and appear differently, making it much more readable on small screens. 
+        </p>
+    </section>
+</body>
 </html>
