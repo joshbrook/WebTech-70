@@ -70,15 +70,12 @@ nav li a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-}
-
-nav .active {
     background: #1e8fc4;
     border-color:#111;
     border-width: 0px;
     border-style: none;
     border-spacing: 0ch;
-  }
+}
 
 nav li a:hover {
     background-color: #111;
@@ -114,7 +111,7 @@ nav li a:hover {
     opacity: 0.8
 }
 
-section{
+div, section{
     text-align: center;
 }
 
