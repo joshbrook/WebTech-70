@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
     <title>Assignment 1 Group 70</title>
 </head>
 
@@ -29,7 +30,7 @@
     </p>
 
     <div>
-        <form action="https://wt.ops.labs.vu.nl/api23/df2d1c0d" method="post" id="main">
+        <form action="https://wt.ops.labs.vu.nl/api23/5c81b3e9" method="post" id="form">
             <table id="authors">
                 <caption>
                     <pre><strong>Photo album of famous authors</strong></pre>
@@ -127,11 +128,11 @@
                     </td>
                     <td>
                         <label for="alt">Alt Text: </label><br>
-                        <input type="text" id="alt" name="alt" required>
+                        <input type="text" id="alt" name="alt">
                     </td>
                     <td>
-                        <label for="tags">Tags: </label><br>
-                        <input type="text" id="tags" name="tags" required>
+                        <label for="tags">Tags (Comma Separated): </label><br>
+                        <input type="text" id="tags" name="tags">
                     </td>
                     <td>
                         <label for="description">Description: </label><br>
@@ -139,7 +140,7 @@
                     </td>
                 </tr>
             </table>
-            <button form="main" type="submit" value="Submit">Submit</button>
+            <button form="form" type="submit" onclick="getForm()">Submit</button>
         </form>
     </div><br>
 

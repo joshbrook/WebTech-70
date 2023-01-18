@@ -125,10 +125,6 @@ ol {
     text-align: left;
 }
 
-input:focus {
-    background-color: rgb(243, 247, 249);
-}
-
 #compatibility {
   border-top:1px solid black;
 }
@@ -158,6 +154,10 @@ input {
     border: 2px solid #1e8fc4;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+input:focus {
+    background-color: rgb(243, 247, 249);
 }
 
 button {
