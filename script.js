@@ -21,37 +21,15 @@ async function getData() {
                 <td>' + entry.description + '</td>\
             </tr>'
         }
-<<<<<<< HEAD
-        html += '<tr>\
-                    <td>\
-                        <label for="image">Image URL: </label><br>\
-                        <input type="url" id="image" name="image" required>\
-                    </td>\
-                    <td>\
-                        <label for="author">Author Name: </label><br>\
-                        <input type="text" id="author" name="author" required>\
-                    </td>\
-                    <td>\
-                        <label for="alt">Alt Text: </label><br>\
-                        <input type="text" id="alt" name="alt">\
-                    </td>\
-                    <td>\
-                        <label for="tags">Tags (Comma Separated): </label><br>\
-                        <input type="text" id="tags" name="tags">\
-                    </td>\
-                    <td>\
-                        <label for="description">Description: </label><br>\
-                        <input type="text" id="description" name="description" required>\
-                    </td>\
-                </tr>'
 
-
-        document.getElementById("authors").insertAdjacentHTML("beforeend", html)
+        document.getElementById("formRow").insertAdjacentHTML("beforebegin", html)
+        
     }
 
     else {
        alert("HTTP error: " + response.status);
     } 
+
 }
 
 async function clearTable(){
@@ -65,15 +43,6 @@ addButton.addEventListener("click", clearTable);
 addButton.addEventListener("click", getForm);
 searchButton.addEventListener("click", clearTable);
 searchButton.addEventListener("click", getForm);
-=======
-        document.getElementById("formRow").insertAdjacentHTML("beforebegin", html)
-    }
-
-    else {
-        alert("HTTP error: " + response.status);
-    }
-}
-
 
 async function resetTable() {
     let response = await fetch(url + "/reset");
@@ -110,4 +79,4 @@ form.addEventListener("submit", async function(e) {
     let result = await response.json();
     alert(result);   
 });     
->>>>>>> a0165f9 (start form submit function)
+
