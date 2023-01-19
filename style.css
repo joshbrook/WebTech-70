@@ -1,5 +1,5 @@
 img.icon {
-    max-width: 200px;
+    max-width: 150px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -84,10 +84,11 @@ nav li a:hover {
 }
 
 #authors {
+    display: inline-block;
     caption-side: top;
     font-family: Georgia, "Courier New", monospace;
     border-collapse: collapse;
-    margin: 2% 5%;
+    margin: 2% 8%;
 }
   
 #authors td, #authors th {
@@ -112,6 +113,7 @@ nav li a:hover {
 }
 
 div, section{
+    margin: auto;
     text-align: center;
 }
 
@@ -165,6 +167,7 @@ button {
     border: none;
     color: white;
     padding: 8px 18px;
+    margin: 1%;
     text-align: center;
     display: inline-block;
     font-size: medium;

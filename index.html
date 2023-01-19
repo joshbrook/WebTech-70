@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    
     <title>Assignment 1 Group 70</title>
 </head>
 
@@ -16,6 +16,7 @@
             <li><a href=#bestSellingAuthors> Other </a></li>
         </ul>
     </nav>
+
     <h1>Assignment 1: "<abbr title="HyperText Markup Language">HTML</abbr> & <abbr
             title="Cascading Style Sheets">CSS</abbr> Markup"</h1>
     <h2>Web Tech Group 70</h2>
@@ -30,7 +31,7 @@
     </p>
 
     <div>
-        <form action="https://wt.ops.labs.vu.nl/api23/5c81b3e9" method="post" id="form">
+        <form id="form">
             <table id="authors">
                 <caption>
                     <pre><strong>Photo album of famous authors</strong></pre>
@@ -127,30 +128,31 @@
                 <tr id="formRow">
                     <td>
                         <label for="image">Image URL: </label><br>
-                        <input type="url" id="image" name="image" required>
+                        <input type="url" id="image" name="image" required value="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png">
                     </td>
                     <td>
                         <label for="author">Author Name: </label><br>
-                        <input type="text" id="author" name="author" required>
+                        <input type="text" id="author" name="author" required value="Image">
                     </td>
                     <td>
                         <label for="alt">Alt Text: </label><br>
-                        <input type="text" id="alt" name="alt">
+                        <input type="text" id="alt" name="alt" value="Play">
                     </td>
                     <td>
                         <label for="tags">Tags (Comma Separated): </label><br>
-                        <input type="text" id="tags" name="tags">
+                        <input type="text" id="tags" name="tags" value="tags">
                     </td>
                     <td>
                         <label for="description">Description: </label><br>
-                        <input type="text" id="description" name="description" required>
+                        <input type="text" id="description" name="description" required value="Description">
                     </td>
                 </tr>
 
             </table>
-            <button form="form" type="submit">Submit</button>
         </form>
-        <button id="reset" onclick="resetForm()">Reset</button>
+        <button form="form">Submit</button><br>
+        <button id="reset" onclick="resetDefault()">Reset</button>
+        <button id="clear" onclick="clearTable()">Clear</button>
     </div><br>
 
     <section id="bestSellingAuthors">
@@ -190,6 +192,7 @@
             more readable on small screens.
         </p>
     </section>
+    <script src="script.js"></script>
 </body>
 
 </html>
