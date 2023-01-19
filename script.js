@@ -66,6 +66,8 @@ async function clearTable(){
     table.innerHTML = "";
 }
 
+
+
 let addButton = document.getElementById("add");
 let searchButton = document.getElementById("search")
 addButton.addEventListener("click", clearTable);
