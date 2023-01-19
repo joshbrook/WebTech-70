@@ -21,14 +21,28 @@ async function getData() {
                 <td>' + entry.description + '</td>\
             </tr>'
         }
+
         document.getElementById("formRow").insertAdjacentHTML("beforebegin", html)
+        
     }
 
     else {
-        alert("HTTP error: " + response.status);
-    }
+       alert("HTTP error: " + response.status);
+    } 
+
 }
 
+async function clearTable(){
+    let table = document.getElementById("authors");
+    table.innerHTML = "";
+}
+
+let addButton = document.getElementById("add");
+let searchButton = document.getElementById("search")
+addButton.addEventListener("click", clearTable);
+addButton.addEventListener("click", getForm);
+searchButton.addEventListener("click", clearTable);
+searchButton.addEventListener("click", getForm);
 
 async function resetTable() {
     let response = await fetch(url + "/reset");
