@@ -56,10 +56,12 @@
                             <li>man</li>
                         </ul>
                     </td>
-                    <td>Nobel laureate Richard Feynman is the author of the famous <em>The Feynman Lectures</em> on
+                    <td>
+                        Nobel laureate Richard Feynman is the author of the famous <em>The Feynman Lectures</em> on
                         Physics,
                         perhaps his most accessible work for anyone with an interest in physics,
-                        compiled from lectures to Caltech undergraduates in 1961–64.</td>
+                        compiled from lectures to Caltech undergraduates in 1961–64.
+                    </td>
                 </tr>
 
                 <tr>
@@ -75,10 +77,11 @@
                             <li>queer theory</li>
                         </ul>
                     </td>
-                    <td>Judith Butler is an American philosopher and gender theorist whose work has influenced political
-                        philosophy,
-                        ethics, and the fields of third-wave feminism, queer theory, and literary theory.
-                        Her most famous work is <em>Gender Trouble: Feminism and the Subversion of Identity</em>.</td>
+                    <td>
+                        Judith Butler is an American philosopher and gender theorist whose work has influenced political
+                        philosophy, ethics, and the fields of third-wave feminism, queer theory, and literary theory.
+                        Her most famous work is <em>Gender Trouble: Feminism and the Subversion of Identity</em>.
+                    </td>
                 </tr>
 
                 <tr>
@@ -94,8 +97,10 @@
                             <li>teacher</li>
                         </ul>
                     </td>
-                    <td>The Canadian Jordan Peterson was born at the 12th of June in 1962.
-                        He is a polarizing media personality, a retired clincal psychologist, and an author.</td>
+                    <td>
+                        The Canadian Jordan Peterson was born at the 12th of June in 1962.
+                        He is a polarizing media personality, a retired clincal psychologist, and an author.
+                    </td>
                 </tr>
 
                 <tr>
@@ -111,13 +116,15 @@
                             <li>absurdism</li>
                         </ul>
                     </td>
-                    <td>Albert Camus was a French philosopher and author, who pioneered the ideo of absurdism.
+                    <td>
+                        Albert Camus was a French philosopher and author, who pioneered the philosophy of absurdism.
                         He joined the French Resistance during WWII where he served as editor-in-chief at
                         <em>Combat</em>, an outlawed newspaper.
-                        After the war, he wrote many books and gave many lectures around the world.</td>
+                        After the war, he wrote many books and gave many lectures around the world.
+                    </td>
                 </tr>
-
-                <tr>
+                
+                <tr id="formRow">
                     <td>
                         <label for="image">Image URL: </label><br>
                         <input type="url" id="image" name="image" required>
@@ -139,9 +146,11 @@
                         <input type="text" id="description" name="description" required>
                     </td>
                 </tr>
+
             </table>
-            <button form="form" type="submit" onclick="getForm()">Submit</button>
+            <button form="form" type="submit">Submit</button>
         </form>
+        <button id="reset" onclick="resetForm()">Reset</button>
     </div><br>
 
     <section id="bestSellingAuthors">
