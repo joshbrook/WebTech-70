@@ -39,26 +39,15 @@ async function clearTable(){
     }
 }
 
-// let addButton = document.getElementById("add");
-// let searchButton = document.getElementById("search")
-// addButton.addEventListener("click", clearTable);
-// addButton.addEventListener("click", getData);
-// searchButton.addEventListener("click", clearTable);
-// searchButton.addEventListener("click", getData);
-
-document.addEventListener('DOMContentLoaded', function () {
+window.onload=function() {
     let form = document.querySelector("form");
     form.addEventListener("submit", async function(e) {
         e.preventDefault(e);
-        console.log("in")
 
-        let res = await fetch(url, {
+        await fetch(url, {
             method: "POST",
             body: new FormData(form)
         });
-
-        let result = await res.json();
-        alert(result);
 
         let response = await fetch(url)
         if (response.ok) {
@@ -79,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("formRow").insertAdjacentHTML("beforebegin", html)
         }
     }); 
-});
+}
 
 async function resetDefault() {
     let response = await fetch(url + "/reset");
