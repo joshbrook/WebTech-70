@@ -15,6 +15,41 @@
     <div>
         <button id="search">search</button>
         <button id="add">add</button>
+        <button id="modalButton">Acces modal</button>
+        <div id="modalDiv" class="modal">
+            <div class="modalContent">
+                <span class="close">&times;</span>
+                <form action="https://wt.ops.labs.vu.nl/api23/5c81b3e9" method="post" id="form">
+                    <table>
+                        <tr id="formRow">
+                            <td>
+                                <label for="image">Image URL: </label><br>
+                                <input type="url" id="image" name="image" required>
+                            </td>
+                            <td>
+                                <label for="author">Author Name: </label><br>
+                                <input type="text" id="author" name="author" required>
+                            </td>
+                            <td>
+                                <label for="alt">Alt Text: </label><br>
+                                <input type="text" id="alt" name="alt">
+                            </td>
+                            <td>
+                                <label for="tags">Tags: </label><br>
+                                <input type="text" id="tags" name="tags">
+                            </td>
+                            <td>
+                                <label for="description">Description: </label><br>
+                                <input type="text" id="description" name="description" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5"><button form="form" type="submit">Submit</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

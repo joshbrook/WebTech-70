@@ -39,12 +39,12 @@ async function clearTable(){
     }
 }
 
-let addButton = document.getElementById("add");
-let searchButton = document.getElementById("search")
-addButton.addEventListener("click", clearTable);
-addButton.addEventListener("click", getForm);
-searchButton.addEventListener("click", clearTable);
-searchButton.addEventListener("click", getForm);
+// let addButton = document.getElementById("add");
+// let searchButton = document.getElementById("search")
+// addButton.addEventListener("click", clearTable);
+// addButton.addEventListener("click", getData);
+// searchButton.addEventListener("click", clearTable);
+// searchButton.addEventListener("click", getData);
 
 document.addEventListener('DOMContentLoaded', function () {
     let form = document.querySelector("form");
@@ -116,4 +116,29 @@ async function sendForm(e) {
 
         document.getElementById("formRow").insertAdjacentHTML("beforebegin", html)
     }
+}
+
+// Modal javascript from source: https://www.w3schools.com/howto/howto_css_modals.asp
+var modal = document.getElementById("modalDiv");
+var modalButton = document.getElementById("modalButton");
+var span = document.getElementsByClassName("close")[0];
+
+modalButton.addEventListener("click", displayModal);
+span.addEventListener("click", hideModal);
+
+async function displayModal() {
+  modal.style.display = "block";
+  console.log("its working")
+}
+
+async function hideModal() {
+  modal.style.display = "none";
+  console.log("its working")
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+    console.log("its working")
+  }
 }
