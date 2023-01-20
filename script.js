@@ -13,7 +13,7 @@ async function getData() {
                 <td><img class="icon" src="' + entry.image + '"></td>\
                 <td>' + entry.author + '</td>\
                 <td>' + entry.alt + '</td>\
-                <td><ul>'
+                <td><ul class="tags">'
             for (let tag of entry.tags.split(",")) {
                 html += '<li>' + tag + '</li>'
             }
@@ -40,14 +40,26 @@ async function clearTable(){
 }
 
 window.onload=function() {
-    let form = document.querySelector("form");
+    let form = document.getElementById("form");
     form.addEventListener("submit", async function(e) {
         e.preventDefault(e);
 
+        let fd = new FormData(form);
+        let newData = {};
+        for (var [key, value] of fd.entries()) { 
+            console.log(key, value);
+            newData[key] = value;
+        }
+
         await fetch(url, {
             method: "POST",
-            body: new FormData(form)
-        });
+            body: JSON.stringify(newData),
+            headers: {
+                "Content-Type": 'application/json',
+                'Accept': 'application/json'
+             },
+        })
+
 
         let response = await fetch(url)
         if (response.ok) {
@@ -58,7 +70,7 @@ window.onload=function() {
                 <td><img class="icon" src="' + entry.image + '"></td>\
                 <td>' + entry.author + '</td>\
                 <td>' + entry.alt + '</td>\
-                <td><ul>'
+                <td><ul class="tags">'
             for (let tag of entry.tags.split(",")) {
                 html += '<li>' + tag + '</li>'
             }
@@ -67,6 +79,7 @@ window.onload=function() {
 
             document.getElementById("formRow").insertAdjacentHTML("beforebegin", html)
         }
+
     }); 
 }
 
@@ -76,34 +89,6 @@ async function resetDefault() {
     if (response.ok) {
         clearTable();
         getData();
-    }
-}
-
-let form = document.querySelector("form")
-async function sendForm(e) {
-    e.preventDefault();
-    await fetch(url, {
-        method: "POST",
-        body: new FormData(form)
-    });
-
-    let response = await fetch(url)
-    if (response.ok) {
-        let authors = await response.json()
-        let entry = authors[authors.length]
-
-        html = '<tr>\
-            <td><img class="icon" src="' + entry.image + '"></td>\
-            <td>' + entry.author + '</td>\
-            <td>' + entry.alt + '</td>\
-            <td><ul>'
-        for (let tag of entry.tags.split(",")) {
-            html += '<li>' + tag + '</li>'
-        }
-        html += '</ul></td>\
-            <td>' + entry.description + '</td></tr>'
-
-        document.getElementById("formRow").insertAdjacentHTML("beforebegin", html)
     }
 }
 
