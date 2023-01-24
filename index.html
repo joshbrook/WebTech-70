@@ -43,8 +43,9 @@
                     <th><strong>Alt Text</strong></th>
                     <th><strong>Tags</strong></th>
                     <th><strong>Description</strong></th>
+                    <th><strong>Edit</strong></th>
                 </tr>
-
+<!-- 
                 <tr>
                     <td><img class="icon" src="https://atomstalk.com/wp-content/uploads/2020/10/richard-feynman.jpg"
                             alt="Richard Feynman"></td>
@@ -124,7 +125,7 @@
                         After the war, he wrote many books and gave many lectures around the world.
                     </td>
                 </tr>
-                
+-->  
                 <tr id="formRow">
                     <td>
                         <label for="image">Image URL: </label><br>
@@ -132,27 +133,27 @@
                     </td>
                     <td>
                         <label for="author">Author Name: </label><br>
-                        <input type="text" id="author" name="author" required value="Name">
+                        <input type="text" id="author" name="author" required value="name">
                     </td>
                     <td>
                         <label for="alt">Alt Text: </label><br>
-                        <input type="text" id="alt" name="alt" value="Alt Text">
+                        <input type="text" id="alt" name="alt"  required value="alt text">
                     </td>
                     <td>
-                        <label for="tags">Tags (Comma Separated): </label><br>
-                        <input type="text" id="tags" name="tags" value="Tags, Tags, Tags">
+                        <label for="tags">Tags: </label><br>
+                        <input type="text" id="tags" name="tags" required value="tags, tags, tags">
                     </td>
                     <td>
                         <label for="description">Description: </label><br>
-                        <input type="text" id="description" name="description" required value="Description">
+                        <textarea id="description" name="description" required>Description</textarea>
                     </td>
                 </tr>
 
             </table>
         </form>
-        <button form="form" type="submit">Submit</button><br>
-        <button id="reset" onclick="resetDefault()">Reset</button>
-        <button id="clear" onclick="clearTable()">Clear</button>
+        <button form="form" type="submit" id="submit">Submit</button><br>
+        <button id="reset">Reset</button>
+        <button id="clear">Clear</button>
     </div><br>
 
     <div>
