@@ -25,6 +25,7 @@ async function getData() {
             i++;
         }
         document.getElementById("formRow").insertAdjacentHTML("beforebegin", html)   
+        createArray();
     }
 
     else {
@@ -98,6 +99,7 @@ window.onload=function() {
 
             document.getElementById("formRow").insertAdjacentHTML("beforebegin", html)
         }
+        createArray();
     })
 
 
@@ -209,7 +211,7 @@ function renderModal(element){
 }
 
 let selectButton = document.getElementById("selectAuthor");
-window.addEventListener("load", createArray);
+// window.addEventListener("load", createArray);
 async function createArray(){
     let array = [];
 
@@ -230,7 +232,7 @@ async function createArray(){
 
     /* source: https://stackoverflow.com/questions/9895082/javascript-populate-drop-down-list-with-array */
     let select = document.getElementById("selectAuthor");
-
+    select.innerHTML= "<option>Select author</option>";
     for(var i = 0; i < uniqueArray.length; i++) {
         let item = uniqueArray[i];
         let option = document.createElement("option");
@@ -246,7 +248,7 @@ async function filterData() {
     let filterName = selectButton.options[selectButton.selectedIndex].text;
     let response = await fetch(url);
     if (filterName === "Select author"){
-        resetDefault();
+        resetTable();
     }
     else if (response.ok) {
         let authors = await response.json();
@@ -264,6 +266,8 @@ async function filterData() {
                 }
                 html += '</ul></td>\
                     <td>' + entry.description + '</td>\
+                <td><button class="edit"><img id="b' + (authors.length-1) + '" class="ed"\
+                    src="https://cdn-icons-png.flaticon.com/512/84/84380.png"></button></td>\
                 </tr>'
             } 
         }
