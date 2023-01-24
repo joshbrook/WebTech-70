@@ -318,7 +318,7 @@ async function filterData() {
                 </tr>'
             } 
         }
-        document.getElementById("formRow").insertAdjacentHTML("beforebegin", html)
+        document.getElementById("titleRow").insertAdjacentHTML("afterend", html)
     }
 
     else {
