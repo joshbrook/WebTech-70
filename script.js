@@ -24,7 +24,7 @@ async function getData() {
                 </tr>'
             i++;
         }
-        document.getElementById("formRow").insertAdjacentHTML("beforebegin", html)   
+        document.getElementById("titleRow").insertAdjacentHTML("afterend", html);   
         createArray();
     }
 
@@ -97,7 +97,10 @@ window.onload=function() {
                     src="https://cdn-icons-png.flaticon.com/512/84/84380.png"></button></td>\
                 </tr>'
 
-            document.getElementById("formRow").insertAdjacentHTML("beforebegin", html)
+            document.getElementsByClassName("main")[0].insertAdjacentHTML("beforeend", html)
+
+            let modal2 = document.getElementsByClassName("modal2")[0]
+            modal2.style.display = 'none';
         }
         createArray();
     })
@@ -130,7 +133,7 @@ window.onload=function() {
                     let entry = authors[n]
                     console.log(entry.author)
 
-                    newForm = '<h2 id="idno">Update Author ' + (n+1) + '</h2><table><form id="formEdit">\
+                    newForm = '<h2 id="idno">Update Author ' + (n+1) + '</h2><form id="formEdit"><table>\
                     <tr id="authors"><td><label for="image">Image URL: </label><br>\
                         <input class="inModal" type="url" id="image" name="image" required value="' + entry.image + '"></td>\
                     <td><label for="author">Author Name: </label><br>\
@@ -141,7 +144,7 @@ window.onload=function() {
                         <input class="inModal" type="text" id="tags" name="tags" value="' + entry.tags + '"></td>\
                     <td><label for="description">Description: </label><br>\
                         <textarea class="inModal" style="height:100px" id="description" name="description" required>' + entry.description + '</textarea></td>\
-                    </tr></form></table><br>\
+                    </tr></table></form><br>\
                     <div><button form="formEdit" type="submit" id="update">Submit</button></div>'
                     
                     //document.getElementById(e.target.id).parentElement.parentElement.parentElement.insertAdjacentHTML("afterend", newForm)
@@ -154,12 +157,24 @@ window.onload=function() {
         })
     }, 2000)
 
+
+    let add = document.getElementById("add")
+    add.addEventListener("click", async function() {
+        let modal2 = document.getElementsByClassName("modal2")[0];
+        modal2.style.display = 'block';
+        modal2.addEventListener("click", async function(e) {
+            if (e.target.className === 'modal2' || e.target.className === "close") {
+                modal2.style.display = 'none';
+            }
+        })
+    })
 }   
 
 
-window.onchange=function() {
+window.onchange = function() {
 
     let update = document.getElementById("update")
+    update.style.display = "inline-block";
     update.addEventListener("click", async function(e) {
         e.preventDefault();
     
@@ -172,16 +187,46 @@ window.onchange=function() {
 
             newForm = document.getElementById("formEdit")
             let fd = new FormData(newForm);
-            console.log(fd.length)
             let newData = {};
             for (var [key, value] of fd.entries()) { 
                 newData[key] = value;
-                console.log(newData[key] + value)
+                console.log(key + ": " + value)
             }
 
-            
+            await fetch(url + "/item/" + authors[(idno-1)].id, {
+                method: "PUT",
+                body: JSON.stringify(newData),
+                headers: {
+                    "Content-Type": 'application/json',
+                    'Accept': 'application/json'
+                 },
+            })
 
-            //getData();
+            removeModal();
+
+            let res = await fetch(url)
+            if (res.ok) {
+                let auths = await res.json()
+                let entry = auths[(idno-1)]
+
+                html = '<td><img class="icon" src="' + entry.image + '"></td>\
+                    <td>' + entry.author + '</td>\
+                    <td>' + entry.alt + '</td>\
+                    <td><ul class="tags">'
+                for (let tag of entry.tags.split(",")) {
+                    html += '<li>' + tag + '</li>'
+                }
+                html += '</ul></td>\
+                    <td>' + entry.description + '</td>\
+                    <td><button class="edit"><img id="b' + (idno-1) + '" class="ed"\
+                        src="https://cdn-icons-png.flaticon.com/512/84/84380.png"></button></td>'
+
+                let row = document.getElementById("b"+(idno-1)).parentElement.parentElement.parentElement;
+                console.log(row);
+                row.innerHTML = html;
+
+                console.log("Author " + idno + " updated")
+            }
         }
 
         
@@ -209,6 +254,7 @@ function renderModal(element){
     }
   })
 }
+
 
 let selectButton = document.getElementById("selectAuthor");
 // window.addEventListener("load", createArray);
@@ -241,6 +287,7 @@ async function createArray(){
         select.appendChild(option);
     }
 }
+
 
 selectButton.addEventListener("change", filterData);
 async function filterData() {
@@ -286,32 +333,4 @@ function removeModal(){
     if (modal) {
       modal.remove()
     }
-  }
-
-
-
-
-// Modal javascript from source: https://www.w3schools.com/howto/howto_css_modals.asp
-var modal = document.getElementById("modalDiv");
-var modalButton = document.getElementById("modalButton");
-var span = document.getElementsByClassName("close")[0];
-
-modalButton.addEventListener("click", displayModal);
-span.addEventListener("click", hideModal);
-
-async function displayModal() {
-  modal.style.display = "block";
-  console.log("its working")
-}
-
-async function hideModal() {
-  modal.style.display = "none";
-  console.log("its working")
-}
-
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-    console.log("its working")
-  }
 }

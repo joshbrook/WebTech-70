@@ -198,13 +198,17 @@ button:hover {
     background-color: #0f73a1;
 }
 
-button.edit, button.update {
+button.edit {
     padding: 0;
     background-color: transparent;
 }
 
+#update {
+    display: none;
+}
+
 /* modal CSS from https://www.w3schools.com/howto/howto_css_modals.asp */
-.modal {
+.modal, .modal2 {
     display: none;
     position: fixed;
     z-index: 1; 
@@ -217,7 +221,7 @@ button.edit, button.update {
     background-color: rgba(0,0,0,0.4); 
   }
   
-  .modalContent {
+  .modalContent, .modalContent2 {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
