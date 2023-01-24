@@ -92,6 +92,74 @@ async function resetDefault() {
     }
 }
 
+let selectButton = document.getElementById("selectAuthor");
+window.addEventListener("load", createArray);
+async function createArray(){
+    let array = [];
+
+    await fetch(url)
+    .then(response => response.json())
+    .then(authors => {
+        authors.forEach(author => array.push(author))
+    })
+    console.log(array);
+    array = array.map(a => a.author);
+
+    let uniqueArray = [];
+    array.forEach((element) => {
+        if (!uniqueArray.includes(element)) {
+            uniqueArray.push(element);
+        }
+    });
+
+    /* source: https://stackoverflow.com/questions/9895082/javascript-populate-drop-down-list-with-array */
+    let select = document.getElementById("selectAuthor");
+
+    for(var i = 0; i < uniqueArray.length; i++) {
+        let item = uniqueArray[i];
+        let option = document.createElement("option");
+        option.textContent = item;
+        option.value = item;
+        select.appendChild(option);
+    }
+}
+
+selectButton.addEventListener("change", filterData);
+async function filterData() {
+    clearTable();
+    let filterName = selectButton.options[selectButton.selectedIndex].text;
+    let response = await fetch(url);
+    if (filterName === "Select author"){
+        resetDefault();
+    }
+    else if (response.ok) {
+        let authors = await response.json();
+        let html = ""
+
+        for (let entry of authors) {
+            if(entry.author === filterName){
+                    html += '<tr>\
+                    <td><img class="icon" src="' + entry.image + '"></td>\
+                    <td>' + entry.author + '</td>\
+                    <td>' + entry.alt + '</td>\
+                    <td><ul class="tags">'
+                for (let tag of entry.tags.split(",")) {
+                    html += '<li>' + tag + '</li>'
+                }
+                html += '</ul></td>\
+                    <td>' + entry.description + '</td>\
+                </tr>'
+            } 
+        }
+        document.getElementById("formRow").insertAdjacentHTML("beforebegin", html)
+    }
+
+    else {
+       alert("HTTP error: " + response.status);
+    } 
+};
+
+
 // Modal javascript from source: https://www.w3schools.com/howto/howto_css_modals.asp
 var modal = document.getElementById("modalDiv");
 var modalButton = document.getElementById("modalButton");
