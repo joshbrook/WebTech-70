@@ -13,20 +13,19 @@
     <nav>
         <ul>
             <li class="active"><a href=""> Home </a></li>
-            <li><a href=#bestSellingAuthors> Other </a></li>
+            <li><a href=#compatibility> Compatibility </a></li>
         </ul>
     </nav>
 
-    <h1>Assignment 1: "<abbr title="HyperText Markup Language">HTML</abbr> & <abbr
-            title="Cascading Style Sheets">CSS</abbr> Markup"</h1>
+    <h1>Assignment 2: "Scripting"</h1>
     <h2>Web Tech Group 70</h2>
     <h2 style="font-size: x-large">Josh & Bodhi</h2>
 
     <p>
-        This webpage contains a photo album of famous authors, and displays functional use of various fundamentals of
-        HTML and CSS.
-        It also contains a form which, once fully implemented, will allow users to add their own entries to the table of
-        authors.
+        This webpage contains an interactive photo album of famous authors, and displays functional 
+        use of various fundamentals of HTML and CSS.
+        It also contains interactive elements, created using JavaScript, which allow users to add 
+        their own entries to the table of authors, edit current entries, and filter by author name.
         The website is optimised to display on both PC displays and mobile devices.
     </p>
 
@@ -133,30 +132,35 @@
             <span class="close">&times;</span>
             <h2>Add Author</h2>
             <form id="form">
-                <table>
-                    <tr id="authors">
-                        <td>
-                            <label for="image">Image URL: </label><br>
-                            <input class="inModal" type="url" id="image" name="image" required value="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png">
-                        </td>
-                        <td>
-                            <label for="author">Author Name: </label><br>
-                            <input class="inModal" type="text" id="author" name="author" required value="name">
-                        </td>
-                        <td>
-                            <label for="alt">Alt Text: </label><br>
-                            <input class="inModal" type="text" id="alt" name="alt"  required value="alt text">
-                        </td>
-                        <td>
-                            <label for="tags">Tags: </label><br>
-                            <input class="inModal" type="text" id="tags" name="tags" required value="tags, tags, tags">
-                        </td>
-                        <td>
-                            <label for="description">Description: </label><br>
-                            <textarea class="inModal" id="description" name="description" required>Description</textarea>
-                        </td>
-                    </tr>
-                </table>
+                <div>
+                    <table id="authors">
+                        <tr>
+                            <td>
+                                <label for="image">Image URL: </label><br>
+                                <input class="inModal" type="url" id="image" name="image" required value="https://media.newyorker.com/photos/5909675d019dfc3494ea0dd0/master/w_2560%2Cc_limit/120409_r22060_g2048.jpg">
+                            </td>
+                            <td>
+                                <label for="author">Author Name: </label><br>
+                                <input class="inModal" type="text" id="author" name="author" required value="Albert Camus">
+                            </td>
+                            <td>
+                                <label for="alt">Alt Text: </label><br>
+                                <input class="inModal" type="text" id="alt" name="alt"  required value="Image of philosopher Albert Camus">
+                            </td>
+                            <td>
+                                <label for="tags">Tags: </label><br>
+                                <input class="inModal" type="text" id="tags" name="tags" required value="philosophy, french, absurdism">
+                            </td>
+                            <td>
+                                <label for="description">Description: </label><br>
+                                <textarea class="inModal" id="description" name="description" required>Albert Camus was a French philosopher and author, who pioneered the philosophy of absurdism.
+                                    He joined the French Resistance during WWII where he served as editor-in-chief at
+                                    <em>Combat</em>, an outlawed newspaper.
+                                </textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </form>
             <button form="form" type="submit" id="submit">Submit</button><br>
         </div>
@@ -171,28 +175,6 @@
         <select id="selectAuthor">
             <option>Select author</option>
         </select>
-    </div>
-
-    <section id="bestSellingAuthors">
-        <h3>Top 5 Best selling authors of all time</h3>
-        <ol>
-            <li>William Shakespeare</li>
-            <li>Agatha Christie</li>
-            <li>Barbara Cartland</li>
-            <li>Danielle Steel</li>
-            <li>Harold Robbins</li>
-        </ol>
-    </section>
-
-    <div>
-        <figure>
-            <img src="https://www.williamshakespeare.net/images/shakespeare.jpg" alt="William Shakespeare" class="icon">
-            <figcaption>Fig 1: Picture of William Shakespeare</figcaption>
-        </figure>
-        <dl>
-            <dt><strong>Tags</strong></dt>
-            <dd style="text-align: center;">Playwright, Poet, Actor</dd>
-        </dl>
     </div>
 
     <section id="compatibility">

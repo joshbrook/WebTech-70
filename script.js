@@ -1,6 +1,7 @@
 let apikey = "5c81b3e9";
 let url = "https://wt.ops.labs.vu.nl/api23/" + apikey;
 
+// retreives all dat from the webserver and adds it to the table on the webpage
 async function getData() {
     let response = await fetch(url);
 
@@ -34,6 +35,7 @@ async function getData() {
 }
 
 
+// empty table of all entries
 async function clearTable(){
     var nodes = document.getElementsByTagName('tr');
     for(var i = nodes.length - 2; i >= 1; i--) {
@@ -41,7 +43,7 @@ async function clearTable(){
     }
 }
 
-
+// reset table to default values taken from the webserver
 async function resetTable() {
     let response = await fetch(url + "/reset");
     
@@ -55,8 +57,10 @@ async function resetTable() {
 // form interaction buttons
 window.onload=function() {
 
+    // get default values on load
     resetTable();
 
+    // submit new author to table
     let submit = document.getElementById("submit");
     let form = document.getElementById("form");
     submit.addEventListener("click", async function(e) {
@@ -133,8 +137,9 @@ window.onload=function() {
                     let entry = authors[n]
                     console.log(entry.author)
 
-                    newForm = '<h2 id="idno">Update Author ' + (n+1) + '</h2><form id="formEdit"><table>\
-                    <tr id="authors"><td><label for="image">Image URL: </label><br>\
+                    // creating new form for the edit modal
+                    newForm = '<h2 id="idno">Update Author ' + (n+1) + '</h2><form id="formEdit"><div><table id="authors">\
+                    <tr><td><label for="image">Image URL: </label><br>\
                         <input class="inModal" type="url" id="image" name="image" required value="' + entry.image + '"></td>\
                     <td><label for="author">Author Name: </label><br>\
                         <input class="inModal" type="text" id="author" name="author" required value="' + entry.author + '"></td>\
@@ -144,7 +149,7 @@ window.onload=function() {
                         <input class="inModal" type="text" id="tags" name="tags" value="' + entry.tags + '"></td>\
                     <td><label for="description">Description: </label><br>\
                         <textarea class="inModal" style="height:100px" id="description" name="description" required>' + entry.description + '</textarea></td>\
-                    </tr></table></form><br>\
+                    </tr></table></div></form><br>\
                     <div><button form="formEdit" type="submit" id="update">Submit</button></div>'
                     
                     //document.getElementById(e.target.id).parentElement.parentElement.parentElement.insertAdjacentHTML("afterend", newForm)
@@ -158,6 +163,7 @@ window.onload=function() {
     }, 2000)
 
 
+    // display edit modal
     let add = document.getElementById("add")
     add.addEventListener("click", async function() {
         let modal2 = document.getElementsByClassName("modal2")[0];
@@ -173,6 +179,7 @@ window.onload=function() {
 
 window.onchange = function() {
 
+    // handle edit: find author id and position, replace old data with new data from the form
     let update = document.getElementById("update")
     update.style.display = "inline-block";
     update.addEventListener("click", async function(e) {
@@ -190,7 +197,6 @@ window.onchange = function() {
             let newData = {};
             for (var [key, value] of fd.entries()) { 
                 newData[key] = value;
-                console.log(key + ": " + value)
             }
 
             await fetch(url + "/item/" + authors[(idno-1)].id, {
@@ -234,7 +240,7 @@ window.onchange = function() {
 }
 
 
-// https://medium.com/@clergemarvin/how-to-create-a-modal-in-javascript-e9ddbff9869c
+// JS modal creation taken from https://medium.com/@clergemarvin/how-to-create-a-modal-in-javascript-e9ddbff9869c
 function renderModal(element){
     // create the background modal div
     const modal = document.createElement('div')
@@ -255,7 +261,7 @@ function renderModal(element){
   })
 }
 
-
+// filtering
 let selectButton = document.getElementById("selectAuthor");
 // window.addEventListener("load", createArray);
 async function createArray(){
