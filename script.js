@@ -263,7 +263,8 @@ function renderModal(element){
 
 // filtering
 let selectButton = document.getElementById("selectAuthor");
-// window.addEventListener("load", createArray);
+
+//idea of creating an array from source: https://medium.com/@jsnidar/using-vanilla-javascript-to-filter-data-returned-in-a-fetch-request-using-dropdown-lists-in-an-html-853651dd5978
 async function createArray(){
     let array = [];
 
