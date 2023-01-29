@@ -1,63 +1,170 @@
 // ###############################################################################
 // Web Technology at VU University Amsterdam
 // Assignment 3
-//
-// The assignment description is available on Canvas. 
-// Please read it carefully before you proceed.
-//
-// This is a template for you to quickly get started with Assignment 3.
-// Read through the code and try to understand it.
-//
-// Have you read the zyBook chapter on Node.js?
-// Have you looked at the documentation of sqlite?
-// https://www.sqlitetutorial.net/sqlite-nodejs/
-//
-// Once you are familiar with Node.js and the assignment, start implementing
-// an API according to your design by adding routes.
-
-
-// ###############################################################################
-//
-// Database setup:
-// First: Our code will open a sqlite database file for you, and create one if it not exists already.
-// We are going to use the variable "db' to communicate to the database:
-// If you want to start with a clean sheet, delete the file 'phones.db'.
-// It will be automatically re-created and filled with one example item.
 
 const sqlite = require('sqlite3').verbose();
 let db = my_database('./gallery.db');
 
-// ###############################################################################
-// The database should be OK by now. Let's setup the Web server so we can start
-// defining routes.
-//
-// First, create an express application `app`:
 
-var express = require("express");
-var app = express();
+// First, create an express application `app`:
+const express = require("express");
+const app = express();
+const router = express.Router();
+const mongoose = require("mongoose");
+const validate = require('mongoose-validator')
+mongoose.connect("mongodb://127.0.0.1/");
+mongoose.set('strictQuery', true);
+
+
+// create validator to parse URL form entries
+var urlValidator = [
+validate({ 
+	validator: value => validator.isURL(value, { protocols: ['http','https','ftp'], require_tld: true, require_protocol: true }),
+	message: 'Must be a Valid URL' 
+  })
+]
+
 
 // We need some middleware to parse JSON data in the body of our HTTP requests:
 app.use(express.json());
+//app.use(express.urlencoded({extended: false}));
 
 
 // ###############################################################################
 // Routes
-// 
-// TODO: Add your routes here and remove the example routes once you know how
-//       everything works.
-// ###############################################################################
 
-// This example route responds to http://localhost:3000/hello with an example JSON object.
-// Please test if this works on your own device before you make any changes.
 
-app.get("/hello", function(req, res) {
-    response_body = {'Hello': 'World'} ;
+app.get("", function(req, res) {
+	db.all(`SELECT * FROM gallery`, function(err, rows) {
+		if (err) {
+            res.status(400).send(err);
+        } 
+        else {
+            res.json(rows);
+        }
+	})
+})
 
-    // This example returns valid JSON in the response, but does not yet set the
-    // associated HTTP response header.  This you should do yourself in your
-    // own routes!
-    res.json(response_body) ;
+
+app.get("/test", function(req, res) {
+	const html = `<h1>Hello, ${req.body.name}!</h1>
+      <p>You are ${req.age} years old.</p>`;
+
+   	res.send(html);
+})
+
+
+// Create a model from the schema
+const Author = mongoose.model("Author", {
+   author:		{ type: String, required: true },
+   image:   	{ type: String, required: true, validate: urlValidator },
+   alt:			{ type: String, required: true },
+   tags: 		{ type: String, required: true },
+   description: { type: String, required: true }
 });
+
+
+// Get list of all authors in the database
+router.get("/", function(req, res) {
+   Author.find(function(err, songs) {
+      if (err) {
+         res.status(400).send(err);
+      } 
+      else {
+         res.json(songs);
+      }
+   });
+});
+
+
+// Add a new author to the database
+router.post("/", function(req, res) {
+   const author = new Author(req.body);
+   author.save(function(err, song) {
+      if (err) {
+         res.status(400).send(err);
+      } 
+      else {
+         res.status(201).json(song);
+      }
+   });
+});
+
+
+router.delete("/:id", function(req, res) {
+    Author.deleteOne({ _id: req.params.id }, function(err, result) {
+       if (err) {
+          res.status(400).send(err);
+       } 
+       else if (result.matchedCount === 0) {
+          res.sendStatus(404);
+       } 
+       else {
+          res.sendStatus(204);
+       }
+    });
+});
+
+
+router.put("/:id", function(req, res) {
+    // Author to update sent in body of request
+    const author = req.body;
+ 
+    // Replace existing author fields with updated author
+    Author.updateOne({ _id: req.params.id }, author, function(err, result) {
+       if (err) {
+          res.status(400).send(err);
+       } 
+       else if (result.matchedCount === 0) {
+          res.sendStatus(404);
+       } 
+       else {
+          res.sendStatus(204);
+       }
+    });
+ });
+
+
+router.get("/", function(req, res) {
+	let query = {};
+	 
+	// Check if tag was supplied in query string
+	if (req.query.tags) {
+	   query = { tags: req.query.tags };
+	}
+	
+	for (let item in query.split(",")) {
+		Author.find(item, function(err, authors) {
+			if (err) {
+			   res.status(400).send(err);
+			} 
+			else {
+			   res.json(authors);
+			}
+		 });
+	}
+	
+});
+
+
+router.get("/:id", function(req, res) {
+// Use the ID in the URL path to find the song
+    Author.findById(req.params.id, function(err, author) {
+        if (err) {
+            res.status(400).send(err);
+        } 
+        else {
+            res.json(author);
+        }
+    });
+});
+
+
+// All requests to API begin with /api
+app.use("/api", router);
+
+
+
 
 // This route responds to http://localhost:3000/db-example by selecting some data from the
 // database and return it as JSON object.
@@ -69,8 +176,12 @@ app.get('/db-example', function(req, res) {
     	// TODO: add code that checks for errors so you know what went wrong if anything went wrong
     	// TODO: set the appropriate HTTP response headers and HTTP response codes here.
 
-    	// # Return db response as JSON
-    	return res.json(rows)
+		if (err) {
+            res.status(400).send(err);
+        } 
+        else {
+            res.json(rows);
+        }
     });
 });
 
@@ -85,7 +196,8 @@ app.post('/post-example', function(req, res) {
 // This should start the server, after the routes have been defined, at port 3000:
 
 app.listen(3000);
-console.log("Your Web server should be up and running, waiting for requests to come in. Try http://localhost:3000/hello");
+console.log("Your Web server should be up and running, waiting for requests to come in. Try http://localhost:3000/");
+
 
 // ###############################################################################
 // Some helper functions called above
@@ -110,6 +222,7 @@ function my_database(filename) {
                     description CHAR(1024) NOT NULL
 		 )
 		`);
+
 		db.all(`select count(*) as count from gallery`, function(err, result) {
 			if (result[0].count == 0) {
 				db.run(`INSERT INTO gallery (author, alt, tags, image, description) VALUES (?, ?, ?, ?, ?)`, [
@@ -118,16 +231,20 @@ function my_database(filename) {
         			"html,http,url,cern,mit",
         			"https://upload.wikimedia.org/wikipedia/commons/9/9d/Sir_Tim_Berners-Lee.jpg",
         			"The internet and the Web aren't the same thing."
-    				]);
+    			]);
+
 				db.run(`INSERT INTO gallery (author, alt, tags, image, description) VALUES (?, ?, ?, ?, ?)`, [
         			"Grace Hopper",
         			"Image of Grace Hopper at the UNIVAC I console",
         			"programming,linking,navy",
         			"https://upload.wikimedia.org/wikipedia/commons/3/37/Grace_Hopper_and_UNIVAC.jpg",
-				"Grace was very curious as a child; this was a lifelong trait. At the age of seven, she decided to determine how an alarm clock worked and dismantled seven alarm clocks before her mother realized what she was doing (she was then limited to one clock)."
-    				]);
+					"Grace was very curious as a child; this was a lifelong trait. At the age of seven, she decided to determine how an alarm clock worked and dismantled seven alarm clocks before her mother realized what she was doing (she was then limited to one clock)."
+    			]);
+
 				console.log('Inserted dummy photo entry into empty database');
-			} else {
+			} 
+			
+			else {
 				console.log("Database already contains", result[0].count, " item(s) at startup.");
 			}
 		});
