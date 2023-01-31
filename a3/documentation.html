@@ -1,4 +1,37 @@
 <!--
+DOCUMENTION FOR FRONT-END USERS OF this RESTFULL HTTP API
+
+When using a server and a database there are a few thing that are important to know. First of all it is 
+important to know what is meant by CRUD. CRUD stands for Create, Read, Update and Delete. CRUD helps the user to 
+get, post, update or delete information from the database. Down below you will find a list with an explaination
+of each operator, combined with the key REST (Representational State Transfer):
+
+1. CREATE (POST) - The create function allows the user to add new records/information to the database. In this server
+if a new record is being posted, the endpoint that is being used is 'http://localhost/..../api/'. This is the location
+where the new record can be found. Posting requires the user to send along a body with a new author as paramater. 
+This body would look this for example:
+{
+    "author":  "Jason",
+	"alt": "picture of jason",
+	"tags": "html",
+	"image": "example.jpg",
+	"description": "Jason is an author"
+}
+
+2. READ (GET) - The read function allows the user to get records/information from the database. To get information
+of an existing record in the database a GET request will be usefull. The endpoint that is being used to receive 
+information about al the authors in the database is 'http://localhost/..../api'. This will give the user a list of 
+al the authors that exist in the data base and it requires no further parameters. 
+
+If the user wants to acces information of only one author the user should use the following endpoint:
+'http://localhost/..../api/?id'. The id of the specific author should be given as a paramter.  
+
+3. UPDATE (PUT) - The update function allows the user to make changes to current records/information of the database. 
+
+
+4. DELETE (DELETE)- The delete function allows the user to delete current records/information completely form the database.
+
+To acces 
 
 
  

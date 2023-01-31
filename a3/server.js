@@ -21,6 +21,7 @@ app.use(express.json());
 // ###############################################################################
 // Routes
 
+<<<<<<< HEAD
 
 // Basic homepage for site
 app.get("/", function(req, res) {
@@ -109,6 +110,131 @@ router.put("/:id", function(req, res) {
 
 // All requests to API begin with /api
 app.use("/api", router);
+=======
+// This example route responds to http://localhost:3000/hello with an example JSON object.
+// Please test if this works on your own device before you make any changes.npm
+
+app.get("", function(req, res) {
+	db.all(`SELECT * FROM gallery`, function(err, rows) {
+	
+		
+    	// TODO: add code that checks for errors so you know what went wrong if anything went wrong
+    	// TODO: set the appropriate HTTP response headers and HTTP response codes here.
+		if (err) {
+			res.status(400).send(err);
+		 } 
+    	// # Return db response as JSON
+    	return res.json(rows)
+    });
+});
+
+app.get("/:id", function(req, res) {
+	db.all(`SELECT * FROM gallery Where id=?`, req.params.id, function(err, rows) {
+	
+		
+    	// TODO: add code that checks for errors so you know what went wrong if anything went wrong
+    	// TODO: set the appropriate HTTP response headers and HTTP response codes here.
+		if (err) {
+			res.status(400).send(err);
+		 } 
+    	// # Return db response as JSON
+    	return res.json(rows)
+    });
+});
+
+// This route responds to http://localhost:3000/db-example by selecting some data from the
+// database and return it as JSON object.
+// Please test if this works on your own device before you make any changes.
+app.get('/db-example', function(req, res) {
+    // Example SQL statement to select the name of all products from a specific brand
+	db.all(`SELECT * FROM gallery WHERE author=?`, ['Grace Hopper'], function(err, rows) {
+	
+		
+    	// TODO: add code that checks for errors so you know what went wrong if anything went wrong
+    	// TODO: set the appropriate HTTP response headers and HTTP response codes here.
+		if (err) {
+			res.status(400).send(err);
+		 } 
+    	// # Return db response as JSON
+    	return res.json(rows)
+    });
+});
+
+app.post('/', async function(req, res) {
+	const author = {
+		author: req.body.author,
+		alt: req.body.alt,
+		tags: req.body.tags,
+		image: req.body.image,
+		description: req.body.description
+	}  
+	try {
+		const newAuthor = await author.save()
+		res.status(201).json(newAuthor)
+	} catch (err) {
+		res.status(400).json({ message: err.message })	
+	}
+ })
+
+const router = express.Router();
+// router.get("", function(req, res) {
+
+// 	const author = {
+// 	   author: "Tim Berners-Lee",
+// 	   alt: "Image of Berners-Lee",
+// 	   tags: "html,http,url,cern,mit",
+// 	   image: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Sir_Tim_Berners-Lee.jpg",
+// 	   description: "The internet and the Web aren't the same thing."
+// 	};
+ 
+// 	res.json(author);
+//  });
+
+//  router.get("/:id", (req, res) => {
+// 	res.send(req.params.id)
+//  })
+
+ router.post('/', async (req,res) => {
+	const author = {
+		author: req.body.author,
+		alt: req.body.alt,
+		tags: req.body.tags,
+		image: req.body.image,
+		description: req.body.description
+	}
+	try {
+		const newAuthor = await author.save()
+		res.status(201).json(newAuthor)
+	} catch (err) {
+		res.status(400).json({ message: err.message })	
+	}
+ })
+
+ router.delete('/id', async (req, res) => {
+	
+ })
+
+// var options = {
+//   'method': 'POST',
+//   'url': 'http://localhost:3000/:id',
+//   'headers': {
+//   },
+//   formData: {
+
+//   }
+// };
+// request(options, function (error, response) {
+//   if (error) throw new Error(error);
+//   console.log(response.body);
+// });
+
+
+// app.post('/post-example', function(req, res) {
+// 	// This is just to check if there is any data posted in the body of the HTTP request:
+// 	console.log(req.body);
+// 	return res.json(req.body);
+// });
+>>>>>>> 9695d2d (start doc)
 
 
 // ###############################################################################
@@ -118,6 +244,11 @@ let port = Math.floor(Math.random() * 9000) + 1000;
 app.listen(port);
 console.log("Your Web server should be up and running, waiting for requests to come in. Try http://localhost:" + port);
 
+<<<<<<< HEAD
+=======
+app.listen(3000);
+console.log("Your Web server should be up and running, waiting for requests to come in. Try http://localhost:3000");
+>>>>>>> 9695d2d (start doc)
 
 // ###############################################################################
 // Some helper functions called above
