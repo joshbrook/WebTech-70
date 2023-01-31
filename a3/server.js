@@ -6,197 +6,117 @@ const sqlite = require('sqlite3').verbose();
 let db = my_database('./gallery.db');
 
 
-// First, create an express application `app`:
 const express = require("express");
 const app = express();
 const router = express.Router();
+
+
 const mongoose = require("mongoose");
-const validate = require('mongoose-validator')
 mongoose.connect("mongodb://127.0.0.1/");
-mongoose.set('strictQuery', true);
 
 
-// create validator to parse URL form entries
-var urlValidator = [
-validate({ 
-	validator: value => validator.isURL(value, { protocols: ['http','https','ftp'], require_tld: true, require_protocol: true }),
-	message: 'Must be a Valid URL' 
-  })
-]
-
-
-// We need some middleware to parse JSON data in the body of our HTTP requests:
 app.use(express.json());
-//app.use(express.urlencoded({extended: false}));
 
 
 // ###############################################################################
 // Routes
 
 
-app.get("", function(req, res) {
-	db.all(`SELECT * FROM gallery`, function(err, rows) {
-		if (err) {
-            res.status(400).send(err);
-        } 
-        else {
-            res.json(rows);
-        }
-	})
-})
-
-
-app.get("/test", function(req, res) {
-	const html = `<h1>Hello, ${req.body.name}!</h1>
-      <p>You are ${req.age} years old.</p>`;
+// Basic homepage for site
+app.get("/", function(req, res) {
+	const html = `<div style="text-align:center"><h1 style="margin:10%">Hello!</h1><p><a href="/api">Visit the API</a></p></div>`;
 
    	res.send(html);
 })
 
 
-// Create a model from the schema
-const Author = mongoose.model("Author", {
-   author:		{ type: String, required: true },
-   image:   	{ type: String, required: true, validate: urlValidator },
-   alt:			{ type: String, required: true },
-   tags: 		{ type: String, required: true },
-   description: { type: String, required: true }
-});
-
-
 // Get list of all authors in the database
 router.get("/", function(req, res) {
-   Author.find(function(err, songs) {
+	db.all(`SELECT * FROM gallery`, function(err, authors) {
       if (err) {
          res.status(400).send(err);
       } 
       else {
-         res.json(songs);
+         res.json(authors);
       }
    });
 });
 
 
-// Add a new author to the database
+// Get author by id
+router.get('/:id', function (req, res) {
+	// First read existing users.
+	db.all("SELECT * FROM gallery WHERE id=?", [req.params.id], function (err, data) {
+
+		if (err) {
+			res.status(400).send(err);
+		} 
+		else {
+			res.json(data);
+		}
+	});
+ })
+
+
+// Add a new author by posting json data
 router.post("/", function(req, res) {
-   const author = new Author(req.body);
-   author.save(function(err, song) {
-      if (err) {
-         res.status(400).send(err);
-      } 
-      else {
-         res.status(201).json(song);
-      }
-   });
-});
-
-
-router.delete("/:id", function(req, res) {
-    Author.deleteOne({ _id: req.params.id }, function(err, result) {
-       if (err) {
-          res.status(400).send(err);
-       } 
-       else if (result.matchedCount === 0) {
-          res.sendStatus(404);
-       } 
-       else {
-          res.sendStatus(204);
-       }
-    });
-});
-
-
-router.put("/:id", function(req, res) {
-    // Author to update sent in body of request
-    const author = req.body;
- 
-    // Replace existing author fields with updated author
-    Author.updateOne({ _id: req.params.id }, author, function(err, result) {
-       if (err) {
-          res.status(400).send(err);
-       } 
-       else if (result.matchedCount === 0) {
-          res.sendStatus(404);
-       } 
-       else {
-          res.sendStatus(204);
-       }
-    });
- });
-
-
-router.get("/", function(req, res) {
-	let query = {};
-	 
-	// Check if tag was supplied in query string
-	if (req.query.tags) {
-	   query = { tags: req.query.tags };
-	}
-	
-	for (let item in query.split(",")) {
-		Author.find(item, function(err, authors) {
+	let item = req.body;
+    db.run(`INSERT INTO gallery (author, alt, tags, image, description)
+        VALUES (?, ?, ?, ?, ?)`,
+        [item['author'], item['alt'], item['tags'], item['image'],  item['description']], function(err, data) {
 			if (err) {
-			   res.status(400).send(err);
+				res.status(400).send(err.message);
 			} 
 			else {
-			   res.json(authors);
+				res.status(201).json(data);
 			}
-		 });
-	}
-	
+		})
 });
 
 
-router.get("/:id", function(req, res) {
-// Use the ID in the URL path to find the song
-    Author.findById(req.params.id, function(err, author) {
-        if (err) {
-            res.status(400).send(err);
-        } 
-        else {
-            res.json(author);
-        }
+// Delete author at given id
+router.delete("/:id", function(req, res) {
+    db.run("DELETE FROM gallery WHERE id=" + req.params.id, function(err, result) {
+       if (err) {
+          res.status(400).send(err);
+       } 
+       else {
+          res.sendStatus(204);
+       }
     });
 });
+
+
+// Update author at given id by putting json data
+router.put("/:id", function(req, res) {
+	let item = req.body;
+    db.run(`UPDATE gallery
+		SET author=?, alt=?, tags=?, image=?,
+		description=? WHERE id=?`,
+		[item['author'], item['alt'], item['tags'], item['image'], item['description'], req.params.id], 
+		function(err, result) {
+			if (err) {
+				res.status(400).send(err);
+			} 
+			
+			else {
+				res.send(item)
+				//res.sendStatus(204);
+			}
+		});
+ });
 
 
 // All requests to API begin with /api
 app.use("/api", router);
 
 
-
-
-// This route responds to http://localhost:3000/db-example by selecting some data from the
-// database and return it as JSON object.
-// Please test if this works on your own device before you make any changes.
-app.get('/db-example', function(req, res) {
-    // Example SQL statement to select the name of all products from a specific brand
-	db.all(`SELECT * FROM gallery WHERE author=?`, ['Grace Hopper'], function(err, rows) {
-	
-    	// TODO: add code that checks for errors so you know what went wrong if anything went wrong
-    	// TODO: set the appropriate HTTP response headers and HTTP response codes here.
-
-		if (err) {
-            res.status(400).send(err);
-        } 
-        else {
-            res.json(rows);
-        }
-    });
-});
-
-app.post('/post-example', function(req, res) {
-	// This is just to check if there is any data posted in the body of the HTTP request:
-	console.log(req.body);
-	return res.json(req.body);
-});
-
-
 // ###############################################################################
-// This should start the server, after the routes have been defined, at port 3000:
+// This should start the server, after the routes have been defined, at a random port:
 
-app.listen(3000);
-console.log("Your Web server should be up and running, waiting for requests to come in. Try http://localhost:3000/");
+let port = Math.floor(Math.random() * 9000) + 1000;
+app.listen(port);
+console.log("Your Web server should be up and running, waiting for requests to come in. Try http://localhost:" + port);
 
 
 // ###############################################################################
