@@ -1,5 +1,5 @@
 <!--
-DOCUMENTION FOR FRONT-END USERS OF this RESTFULL HTTP API
+DOCUMENTION FOR FRONT-END USERS OF this RESTFUL HTTP API
 
 When using a server and a database there are a few things that are important to know. First of all it is 
 important to know what is meant by CRUD. CRUD stands for Create, Read, Update and Delete. CRUD helps the user to 
@@ -19,10 +19,10 @@ This body would look like this for example:
 }
 The content type is application/json.
 
-2. READ (GET) - The read function allows the user to get records/information from the database. This method is 
+2. RETRIEVE (GET) - The read function allows the user to get records/information from the database. This method is 
 considered safe, since it doesn't change anything in the server. it is also idempotent, because identical request will
 always have the same results. To get information of an existing record in the database a GET request will be 
-usefull. The endpoint that is being used to receive information about al the authors in the database is 
+useful. The endpoint that is being used to receive information about all the authors in the database is 
 'http://localhost/..../api'. This will give the user a list of al the authors that exist in the data base and it 
 doesn't require any parameters. 
 
@@ -36,8 +36,8 @@ The respons will be a json body with the authors information in it, for example:
 3. UPDATE (PUT) - The update function allows the user to make changes to current records/information of the database. 
 To do this the put method is used and this one has the same endpoint as the post method: 'http://localhost/..../api/:id'.
 Again the id depends on which record needs to be updated. A body is sent as paramater to this function and this looks 
-similair to the body of the post method. Furthermore the content type is application/json and the method is idempotent
-identical request will always get the same results. 
+similar to the body of the post method. Furthermore, the content type is application/json and the method is idempotent, as
+identical requests will always provide the same results. 
 
 4. DELETE (DELETE) - The delete function allows the user to delete current records/information completely from the database.
 The delete method is also considered impotent and therefore will always have the same results with identical request. 

@@ -1,5 +1,6 @@
 let apikey = "5c81b3e9";
 let url = "https://wt.ops.labs.vu.nl/api23/" + apikey;
+url = "http://localhost:5000/api"
 
 // retreives all dat from the webserver and adds it to the table on the webpage
 async function getData() {
@@ -21,7 +22,10 @@ async function getData() {
             }
             html += '</ul></td>\
                 <td>' + entry.description + '</td>\
-                <td><button class="edit"><img id="b' + i + '" class="ed" src="https://cdn-icons-png.flaticon.com/512/84/84380.png"></button></td>\
+                <td><button class="edit"><img id="b' + i + '" class="ed" \
+                    src="https://cdn-icons-png.flaticon.com/512/84/84380.png"></button>\
+                <button class="delete"><img id="d' + i + '" class="del" \
+                    src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></button></td>\
                 </tr>'
             i++;
         }
@@ -43,6 +47,7 @@ async function clearTable(){
     }
 }
 
+
 // reset table to default values taken from the webserver
 async function resetTable() {
     let response = await fetch(url + "/reset");
@@ -58,7 +63,7 @@ async function resetTable() {
 window.onload=function() {
 
     // get default values on load
-    resetTable();
+    getData();
 
     // submit new author to table
     let submit = document.getElementById("submit");
@@ -98,7 +103,9 @@ window.onload=function() {
             html += '</ul></td>\
                 <td>' + entry.description + '</td>\
                 <td><button class="edit"><img id="b' + (authors.length-1) + '" class="ed"\
-                    src="https://cdn-icons-png.flaticon.com/512/84/84380.png"></button></td>\
+                        src="https://cdn-icons-png.flaticon.com/512/84/84380.png"></button>\
+                    <button class="delete"><img id="d' + (authors.length-1) + '" class="del" \
+                        src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></button></td>\
                 </tr>'
 
             document.getElementsByClassName("main")[0].insertAdjacentHTML("beforeend", html)
@@ -122,14 +129,14 @@ window.onload=function() {
     })
 
 
-    // adding edit buttons through event delegation https://www.mattlunn.me.uk/2012/05/event-delegation-in-javascript/
+    // edit & delete buttons using event delegation https://www.mattlunn.me.uk/2012/05/event-delegation-in-javascript/
     setTimeout(() => {
         let table = document.getElementById("authors");
         table.addEventListener("click", async function(e) {
             e.preventDefault();
             if (e.target && e.target.matches("img.ed")) {
                 let n = Number(e.target.id.replace("b",""));
-                console.log("button " + n + " clicked")
+                console.log("update " + n + " clicked")
 
                 let response = await fetch(url);
                 if (response.ok) {
@@ -159,6 +166,24 @@ window.onload=function() {
 
             }
 
+            if (e.target && e.target.matches("img.del")) {
+                let n = Number(e.target.id.replace("d",""));
+                console.log("delete " + n + " clicked")
+
+                let response = await fetch(url);
+                if (response.ok) {
+                    let authors = await response.json()
+                    let entry = authors[n]
+                    console.log("id="+entry.id)
+                    await fetch(url + "/" + entry.id, {
+                        method: "DELETE"
+                    })
+
+                    let row = document.getElementById("d"+ n).parentElement.parentElement.parentElement;
+                    console.log(row);
+                    row.outerHTML = "";
+                }
+            }
         })
     }, 2000)
 
@@ -199,7 +224,7 @@ window.onchange = function() {
                 newData[key] = value;
             }
 
-            await fetch(url + "/item/" + authors[(idno-1)].id, {
+            await fetch(url + "/" + authors[(idno-1)].id, {
                 method: "PUT",
                 body: JSON.stringify(newData),
                 headers: {
@@ -224,8 +249,10 @@ window.onchange = function() {
                 }
                 html += '</ul></td>\
                     <td>' + entry.description + '</td>\
-                    <td><button class="edit"><img id="b' + (idno-1) + '" class="ed"\
-                        src="https://cdn-icons-png.flaticon.com/512/84/84380.png"></button></td>'
+                    <td><button class="edit"><img id="b' + (idno-1) + '" class="ed" \
+                            src="https://cdn-icons-png.flaticon.com/512/84/84380.png"></button>\
+                        <button class="delete"><img id="d' + (idno-1) + '" class="del" \
+                            src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></button></td>'
 
                 let row = document.getElementById("b"+(idno-1)).parentElement.parentElement.parentElement;
                 console.log(row);

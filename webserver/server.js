@@ -9,6 +9,7 @@ let db = my_database('./gallery.db');
 const express = require("express");
 const app = express();
 const router = express.Router();
+const cors = require("cors");
 
 
 const mongoose = require("mongoose");
@@ -16,6 +17,7 @@ mongoose.connect("mongodb://127.0.0.1/");
 
 
 app.use(express.json());
+app.use(cors());
 
 
 // ###############################################################################
@@ -68,7 +70,8 @@ router.post("/", function(req, res) {
 				res.status(400).send(err.message);
 			} 
 			else {
-				res.status(201).json(data);
+				res.status(201);
+				res.json(data);
 			}
 		})
 });
@@ -112,9 +115,10 @@ app.use("/api", router);
 
 
 // ###############################################################################
-// This should start the server, after the routes have been defined, at a random port:
+// This should start the server, after the routes have been defined, at port 5000
 
-let port = Math.floor(Math.random() * 9000) + 1000;
+// let port = Math.floor(Math.random() * 9000) + 1000;
+let port = 5000
 app.listen(port);
 console.log("Your Web server should be up and running, waiting for requests to come in. Try http://localhost:" + port);
 
